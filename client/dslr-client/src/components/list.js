@@ -1,9 +1,9 @@
 import React from "react";
 import axios from 'axios';
-import { ActList } from "./index";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import Button from '@mui/material/Button';
+import { Link } from "react-router-dom";
 class List extends React.Component {
     constructor(props) {
         super(props);
@@ -58,10 +58,13 @@ class List extends React.Component {
                     </Container>
                     <div style={{ width: '100%' }}>
                         <div style={{ width: '100%', height: '250px', textAlign: 'left', marginTop: '50px' }}>term and cons container</div>
-                        <Button style={{ width: '80%', backgroundColor: 'black', color: 'white' }} onClick={() => this.openDslr()} variant="contained">Contained</Button>
+                        <Link to="/payment">
+                            <Button style={{ width: '80%', backgroundColor: 'black', color: 'white' }}>PAY</Button>
+                        </Link>
+                        {/* <Button style={{ width: '80%', backgroundColor: 'black', color: 'white' }} onClick={() => this.openDslr()} variant="contained">PAY</Button> */}
+
                     </div>
                 </div>
-
             </div>
         );
     }
