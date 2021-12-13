@@ -58,5 +58,19 @@ app.post('/create-payment', async (req, res, next) => {
     next();
 });
 
+app.post('/retrieve-charge', async (req, res, next) => {
+    try {
+        let response;
+        const charge = await omise.charges.retrieve(req.body.chargeId, function (error, charge) {
+            response = charge
+            console.log('response', response)
+        });
+        res.send({ response });
+    } catch (err) {
+        console.log(err);
+    }
+    next();
+});
+
 
 app.listen(3000);
