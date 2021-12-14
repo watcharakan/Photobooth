@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
-import Omise from 'omise';
+import * as shell from "./shell"
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+
 export default class ScanQr extends Component {
     constructor(props) {
         super(props);
-        this.state = { loading: false, qrImgSrc: '', charge: {}, isSuccess: false };
+        this.state = { loading: false, qrImgSrc: '', charge: {}, isSuccess: false, isFail: false };
 
     }
 
@@ -13,16 +16,39 @@ export default class ScanQr extends Component {
         this.createPaymentSource();
         this.checkChargeStatus()
     }
+
+    callShellApplication = () => {
+        // shell.shellExec()
+    }
+
     render() {
         return (
             <div style={{ display: 'flex', width: '100%', height: '100%', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', color: 'black' }}>
-                <div style={{ width: "400px", height: "400px", }}>
+                {!this.state.isFail && <div style={{ width: "400px", height: "400px", }}>
                     {this.state.qrImgSrc === '' && <div style={{ marginTop: '200px' }}><CircularProgress /></div>}
                     {this.state.qrImgSrc !== '' && <img style={{ marginBottom: '200px' }} src={this.state.qrImgSrc} alt="qrCode" />}
-                    {this.state.isSuccess && <div>PAID</div>}
-                </div>
+                </div>}
+                {this.state.isFail && this.renderFailScreen()}
             </div>
         )
+    }
+
+    renderFailScreen = () => {
+        return <div style={{ width: "100%", height: "400px", display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <Box>
+                <div>ทำรายการล้มเหลว กรุณาลองใหม่อีกครั้ง</div>
+                <Button style={{ marginTop: '25px' }} variant="outlined" onClick={() => window.location.reload()}>ตกลง</Button>
+            </Box>
+
+        </div>
+    }
+
+    callDslr = () => {
+        axios.get('http://localhost:3000/open').then(res => {
+            if (res) {
+                window.location.replace('/');
+            }
+        })
     }
 
     createPaymentSource = () => {
@@ -32,7 +58,6 @@ export default class ScanQr extends Component {
             "amount": 400000,
             "currency": "THB"
         }, (statusCode, response) => {
-            console.log(' response.id', response.id)
             this.setState({ loading: true })
             axios.post('http://localhost:3000/create-payment', {
                 source: response.id
@@ -41,12 +66,13 @@ export default class ScanQr extends Component {
                     qrImgSrc: res.data.charge.source.scannable_code.image.download_uri,
                     charge: res.data.charge
                 })
-                console.log('qrImgSrc', this.state.qrImgSrc)
-                console.log('charge', this.state.charge)
             })
-            console.log(response)
 
         });
+    }
+
+    toggleDslr = () => {
+        this.callDslr()
     }
 
     checkChargeStatus = () => {
@@ -56,37 +82,16 @@ export default class ScanQr extends Component {
                 chargeId: this.state.charge.id
             }).then(res => {
                 this.setState({ isSuccess: res.data.response.status === 'successful' })
-                console.log('res.data.response.paid', this.state.isSuccess)
+                console.log('res.data.response.isSuccess', this.state.isSuccess)
                 if (!!this.state.isSuccess) {
                     clearInterval(myInterval);
-                    // this.openDslr();
+                    this.toggleDslr();
                     return;
+                }
+                if (res.data.response.status === 'failed') {
+                    this.setState({ isFail: true })
                 }
             })
         }, 10000);
     }
-
-    openDslr = () => {
-        var config = {
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS'
-            },
-        };
-        console.log('dslr is openning')
-        axios.get('http://localhost:3000/open', config)
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            })
-            .then(function () {
-                // always executed
-            });
-    }
-
 }
