@@ -4,6 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import Button from '@mui/material/Button';
 import { Link } from "react-router-dom";
+import '../App.css';
+import image from '../assets/images.png'
+
 class List extends React.Component {
     constructor(props) {
         super(props);
@@ -13,27 +16,32 @@ class List extends React.Component {
     componentDidMount() {
         axios.defaults.headers.common['Access-Control-Allow-Origin'] = "*"
     }
-
     render() {
         return (
-            <div style={{ width: '90%', display: 'flex', height: '750px' }}>
+            <div style={{ width: '75%', display: 'flex', height: '750px' }}>
                 <div style={{ width: '40%', height: '100%' }}>
                     <Row>
-                        <Col style={{ height: '150px', width: '150px', padding: '10px', backgroundColor: 'skyblue', marginRight: '20px' }}>
+                        <Col style={{ padding: '10px', marginRight: '20px' }}>
+                            <img style={{ minWidth: '120px', width: '100%', objectFit: 'contain' }} src={image} />
                         </Col>
-                        <Col style={{ height: '150px', width: '150px', padding: '10px', backgroundColor: 'skyblue' }}>
-                        </Col>
-                    </Row>
-                    <Row style={{ marginTop: '20px' }}>
-                        <Col style={{ height: '150px', width: '150px', padding: '10px', backgroundColor: 'skyblue', marginRight: '20px' }}>
-                        </Col>
-                        <Col style={{ height: '150px', width: '150px', padding: '10px', backgroundColor: 'skyblue' }}>
+                        <Col style={{ padding: '10px', marginRight: '20px' }}>
+                            <img style={{ minWidth: '120px', width: '100%', objectFit: 'contain' }} src={image} />
                         </Col>
                     </Row>
                     <Row style={{ marginTop: '20px' }}>
-                        <Col style={{ height: '150px', width: '150px', padding: '10px', backgroundColor: 'skyblue', marginRight: '20px' }}>
+                        <Col style={{ padding: '10px', marginRight: '20px' }}>
+                            <img style={{ minWidth: '120px', width: '100%', objectFit: 'contain' }} src={image} />
                         </Col>
-                        <Col style={{ height: '150px', width: '150px', padding: '10px', backgroundColor: 'skyblue' }}>
+                        <Col style={{ padding: '10px', marginRight: '20px' }}>
+                            <img style={{ minWidth: '120px', width: '100%', objectFit: 'contain' }} src={image} />
+                        </Col>
+                    </Row>
+                    <Row style={{ marginTop: '20px' }}>
+                        <Col style={{ padding: '10px', marginRight: '20px' }}>
+                            <img style={{ minWidth: '120px', width: '100%', objectFit: 'contain' }} src={image} />
+                        </Col>
+                        <Col style={{ padding: '10px', marginRight: '20px' }}>
+                            <img style={{ minWidth: '120px', width: '100%', objectFit: 'contain' }} src={image} />
                         </Col>
                     </Row>
                 </div>

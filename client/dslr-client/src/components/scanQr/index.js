@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
-import * as shell from "./shell"
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
@@ -14,16 +13,17 @@ export default class ScanQr extends Component {
 
     componentDidMount() {
         this.createPaymentSource();
-        this.checkChargeStatus()
+        this.checkChargeStatus(true)
     }
 
-    callShellApplication = () => {
-        // shell.shellExec()
+    componentWillUnmount() {
+        console.log('unmount')
+        this.checkChargeStatus(false)
     }
 
     render() {
         return (
-            <div style={{ display: 'flex', width: '100%', height: '100%', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', color: 'black' }}>
+            <div style={{ display: 'flex', width: '100%', height:'750px', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', color: 'black' }}>
                 {!this.state.isFail && <div style={{ width: "400px", height: "400px", }}>
                     {this.state.qrImgSrc === '' && <div style={{ marginTop: '200px' }}><CircularProgress /></div>}
                     {this.state.qrImgSrc !== '' && <img style={{ marginBottom: '200px' }} src={this.state.qrImgSrc} alt="qrCode" />}
@@ -75,23 +75,36 @@ export default class ScanQr extends Component {
         this.callDslr()
     }
 
-    checkChargeStatus = () => {
+    checkChargeStatus = (isMouted) => {
+        console.log('call')
         let myInterval;
-        myInterval = setInterval(() => {
-            axios.post('http://localhost:3000/retrieve-charge', {
-                chargeId: this.state.charge.id
-            }).then(res => {
-                this.setState({ isSuccess: res.data.response.status === 'successful' })
-                console.log('res.data.response.isSuccess', this.state.isSuccess)
-                if (!!this.state.isSuccess) {
-                    clearInterval(myInterval);
-                    this.toggleDslr();
-                    return;
-                }
-                if (res.data.response.status === 'failed') {
-                    this.setState({ isFail: true })
-                }
-            })
-        }, 10000);
+        let count = 0;
+        if (isMouted) {
+            myInterval = setInterval(() => {
+                axios.post('http://localhost:3000/retrieve-charge', {
+                    chargeId: this.state.charge.id
+                }).then(res => {
+                    this.setState({ isSuccess: res.data.response.status === 'successful' })
+                    if (!!this.state.isSuccess) {
+                        clearInterval(myInterval);
+                        this.toggleDslr();
+                        return;
+                    }
+                    if (res.data.response.status === 'failed') {
+                        this.setState({ isFail: true })
+                    }
+                    if (count > 10) {
+                        clearInterval(myInterval);
+                        window.location.replace('/')
+                        return;
+                    }
+                })
+                count++
+            }, 10000);
+        }
+        else {
+            clearInterval(myInterval);
+            return;
+        }
     }
 }

@@ -5,7 +5,7 @@ import { ScanQr } from './components';
 
 function App() {
   return (
-    <div className="App">
+    <div  className="App">
       <header className="App-header">
         <Routes>
           <Route path='/' element={<List />} />
