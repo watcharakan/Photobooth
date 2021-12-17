@@ -2,8 +2,11 @@
   text-align: center;
 }
 
-.div-bg{
+.div-bg {
   background-image: url("../src/assets/S__56590405.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .App-logo {
@@ -26,10 +29,6 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  background-image: url("../src/assets/S__56590405.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .App-link {
@@ -40,6 +39,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
