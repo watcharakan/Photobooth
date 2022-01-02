@@ -18,7 +18,7 @@ class List extends React.Component {
     }
     render() {
         return (
-            <div className="div-bg" style={{ width: '100%', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <div style={{ width: '100%', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <div style={{ width: '75%', display: 'flex', height: '750px' }}>
                     <div style={{ width: '40%', height: '100%' }}>
                         <Row>
