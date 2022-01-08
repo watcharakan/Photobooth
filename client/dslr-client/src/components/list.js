@@ -55,7 +55,7 @@ class List extends React.Component {
                                 <Col>THB</Col>
                             </Row>
                             <Row>
-                                <Col style={{ textAlign: 'left', color: 'grey' }}>Service charge 3%</Col>
+                                <Col style={{ textAlign: 'left', color: 'grey' }}>Service</Col>
                                 <Col style={{ textAlign: 'right' }}>5</Col>
                                 <Col>THB</Col>
                             </Row>
