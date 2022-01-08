@@ -8,8 +8,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const omise = require("omise")({
-    publicKey: 'pkey_test_5pvpd2gv9r5m4ak2hq9',
-    secretKey: 'skey_test_5pvpd2gvi814k70o9v3'
+    publicKey: 'pkey_5qev9qhktbmayq7inwz',
+    secretKey: 'skey_5qfpbic1bq3t2pq1cts'
 });
 
 const cors = require('cors');
@@ -47,7 +47,7 @@ const openDslr = () => {
 app.post('/create-payment', async (req, res, next) => {
     try {
         const charge = await omise.charges.create({
-            amount: '400000',
+            amount: '2000',
             source: req.body.source,
             currency: "thb",
         });

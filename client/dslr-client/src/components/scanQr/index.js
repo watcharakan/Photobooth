@@ -53,9 +53,9 @@ export default class ScanQr extends Component {
 
     createPaymentSource = () => {
         const { OmiseCard, Omise } = window
-        Omise.setPublicKey('pkey_test_5pvpd2gv9r5m4ak2hq9');
+        Omise.setPublicKey('pkey_5qev9qhktbmayq7inwz');
         Omise.createSource('promptpay', {
-            "amount": 400000,
+            "amount": 2000,
             "currency": "THB"
         }, (statusCode, response) => {
             this.setState({ loading: true })
