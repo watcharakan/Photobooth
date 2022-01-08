@@ -55,13 +55,13 @@ class List extends React.Component {
                                 <Col>THB</Col>
                             </Row>
                             <Row>
-                                <Col style={{ textAlign: 'left', color: 'grey' }}>VAT 7%</Col>
-                                <Col style={{ textAlign: 'right' }}>10.50</Col>
+                                <Col style={{ textAlign: 'left', color: 'grey' }}>Service charge 3%</Col>
+                                <Col style={{ textAlign: 'right' }}>5</Col>
                                 <Col>THB</Col>
                             </Row>
                             <Row>
                                 <Col style={{ textAlign: 'left', color: 'grey' }}>Total</Col>
-                                <Col style={{ textAlign: 'right' }}>160.50</Col>
+                                <Col style={{ textAlign: 'right' }}>155</Col>
                                 <Col>THB</Col>
                             </Row>
                         </Container>
