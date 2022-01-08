@@ -13,6 +13,13 @@
   background-size: contain;
 }
 
+.div-list-bg {
+  background-image: url("../src/assets/list_bg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
