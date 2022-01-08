@@ -6,8 +6,13 @@ const corsOptions = {
     credentials: true,            //access-control-allow-credentials:true
     optionSuccessStatus: 200
 }
-
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors(corsOptions));
+app.use(express.static('public'))
+
+app.listen(3000, () => { })
+
 app.get('/open', function (req, res) {
     var today = new Date();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds() + "." + today.getMilliseconds();
@@ -22,3 +27,4 @@ const openDslr = () => {
         // …your callback code may run here…
     });
 }
+
