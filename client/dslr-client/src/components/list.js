@@ -16,9 +16,12 @@ class List extends React.Component {
     componentDidMount() {
         axios.defaults.headers.common['Access-Control-Allow-Origin'] = "*"
     }
+    navigateToList = () => {
+        window.location.replace('/payment');
+    }
     render() {
         return (
-            <div className="div-list-bg" style={{ width: '100%', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <div className="div-list-bg" style={{ width: '100%', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={() => this.navigateToList()}>
                 <div style={{ width: '75%', display: 'flex', height: '750px' }}>
                     <div style={{ width: '50%', height: '100%' }}>
                         <Row>
@@ -47,7 +50,7 @@ class List extends React.Component {
                         </Row>
                     </div>
                     <div style={{ width: '50%', height: '100%', display: 'flex', alignItems: 'flex-start', paddingTop: '30px', color: 'black', flexDirection: 'column', marginLeft: '40px' }}>
-                        <h2>3 Acts (2 Copies)</h2>
+                        {/* <h2>3 Acts (2 Copies)</h2>
                         <Container style={{ width: '70%', marginTop: '20px' }}>
                             <Row>
                                 <Col style={{ textAlign: 'left', color: 'grey' }}>Tickket</Col>
@@ -64,12 +67,12 @@ class List extends React.Component {
                                 <Col style={{ textAlign: 'right' }}>155</Col>
                                 <Col>THB</Col>
                             </Row>
-                        </Container>
+                        </Container> */}
                         <div style={{ width: '100%' }}>
-                            <div style={{ width: '100%', height: '250px', textAlign: 'left', marginTop: '50px' }}></div>
+                            {/* <div style={{ width: '100%', height: '250px', textAlign: 'left', marginTop: '50px' }}></div>
                             <Link to="/payment">
                                 <Button style={{ width: '80%', backgroundColor: 'black', color: 'white' }}>PAY</Button>
-                            </Link>
+                            </Link> */}
                             {/* <Button style={{ width: '80%', backgroundColor: 'black', color: 'white' }} onClick={() => this.openDslr()} variant="contained">PAY</Button> */}
 
                         </div>
