@@ -47,7 +47,7 @@ const openDslr = () => {
 app.post('/create-payment', async (req, res, next) => {
     try {
         const charge = await omise.charges.create({
-            amount: '2000',
+            amount: '15500',
             source: req.body.source,
             currency: "thb",
         });

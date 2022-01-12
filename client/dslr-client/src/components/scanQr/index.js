@@ -23,7 +23,7 @@ export default class ScanQr extends Component {
 
     render() {
         return (
-            <div style={{ display: 'flex', width: '100%', height:'750px', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', color: 'black' }}>
+            <div className="div-list-qr" style={{ width: '100%', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 {!this.state.isFail && <div style={{ width: "400px", height: "400px", }}>
                     {this.state.qrImgSrc === '' && <div style={{ marginTop: '200px' }}><CircularProgress /></div>}
                     {this.state.qrImgSrc !== '' && <img style={{ marginBottom: '200px' }} src={this.state.qrImgSrc} alt="qrCode" />}
@@ -55,11 +55,11 @@ export default class ScanQr extends Component {
         const { OmiseCard, Omise } = window
         Omise.setPublicKey('pkey_5qev9qhktbmayq7inwz');
         Omise.createSource('promptpay', {
-            "amount": 2000,
+            "amount": 15500,
             "currency": "THB"
         }, (statusCode, response) => {
             this.setState({ loading: true })
-            axios.post('http://localhost:3000/create-payment', {
+            axios.post('https://pb-api.xcard.live/create-payment', {
                 source: response.id
             }).then(res => {
                 this.setState({
@@ -81,7 +81,7 @@ export default class ScanQr extends Component {
         let count = 0;
         if (isMouted) {
             myInterval = setInterval(() => {
-                axios.post('http://localhost:3000/retrieve-charge', {
+                axios.post('https://pb-api.xcard.live/retrieve-charge', {
                     chargeId: this.state.charge.id
                 }).then(res => {
                     this.setState({ isSuccess: res.data.response.status === 'successful' })
